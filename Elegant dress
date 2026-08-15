@@ -1,0 +1,21 @@
+<h3>Basic Top</h3>
+
+<div class="price">
+  ₦4,000
+</div>
+
+<p style="font-family:Arial,sans-serif;font-size:12px;color:#80636b;line-height:1.5;margin-bottom:10px;">
+  Women's slim-fit round-neck top. Simple, versatile and easy to style.
+</p>
+
+<p style="font-family:Arial,sans-serif;font-size:12px;color:#80636b;margin-bottom:12px;">
+  Sizes: Small • Medium • Large
+  <br>
+  Colours: White • Wine • Black • Pink
+</p>
+
+<button
+  class="add-cart"
+  onclick="addToCart('Basic Top',4000)">
+  Add to Cart
+</button>
