@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Cheryl's Closet</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: #fff9fb;
+      color: #43252d;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+    }
+
+    /* HEADER */
+
+    header {
+      background: #ffffff;
+      padding: 16px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      color: #8e2948;
+      font-size: 25px;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .logo span {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 9px;
+      letter-spacing: 4px;
+      text-align: center;
+      color: #b08445;
+      margin-top: 3px;
+    }
+
+    nav {
+      display: flex;
+      gap: 22px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+    }
+
+    nav a:hover {
+      color: #c55476;
+    }
+
+    .cart-btn {
+      border: none;
+      background: #8e2948;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 25px;
+    }
+
+    /* HERO */
+
+    .hero {
+      min-height: 560px;
+      padding: 70px 7%;
+      display: flex;
+      align-items: center;
+
+      background:
+        radial-gradient(circle at 85% 20%, #f4cbd6 0, transparent 28%),
+        linear-gradient(135deg, #fff8fa, #f7e0e6);
+    }
+
+    .hero-content {
+      max-width: 600px;
+    }
+
+    .eyebrow {
+      color: #b08445;
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 {
+      color: #8e2948;
+      font-size: clamp(50px, 12vw, 82px);
+      line-height: .9;
+      font-style: italic;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      font-style: normal;
+      letter-spacing: 8px;
+      margin-top: 18px;
+      color: #9d7141;
+    }
+
+    .hero p {
+      font-family: Arial, sans-serif;
+      color: #684852;
+      line-height: 1.7;
+      max-width: 470px;
+      margin-bottom: 28px;
+    }
+
+    .shop-btn {
+      background: #8e2948;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 30px;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+    }
+
+    /* SECTION */
+
+    section {
+      padding: 65px 7%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .section-title h2 {
+      color: #8e2948;
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .section-title p {
+      font-family: Arial, sans-serif;
+      color: #80636b;
+      font-size: 14px;
+    }
+
+    /* CATEGORIES */
+
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .category {
+      min-height: 150px;
+      padding: 22px;
+      display: flex;
+      align-items: end;
+      border-radius: 18px;
+      color: #55222f;
+      font-size: 20px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #f6ccd7, #eddacb);
+    }
+
+    .category:nth-child(2) {
+      background: linear-gradient(135deg, #ead2d9, #f6e7df);
+    }
+
+    .category:nth-child(3) {
+      background: linear-gradient(135deg, #e9d6c1, #f3d8df);
+    }
+
+    .category:nth-child(4) {
+      background: linear-gradient(135deg, #f3ccd8, #e8c4cd);
+    }
+
+    .category:nth-child(5) {
+      background: linear-gradient(135deg, #ead7d2, #f5e2e7);
+    }
+
+    .category:nth-child(6) {
+      background: linear-gradient(135deg, #f0dfc7, #eed0dc);
+    }
+
+    /* PRODUCTS */
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      background: white;
+      border-radius: 17px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(80,35,48,.08);
+    }
+
+    .product-image {
+      height: 210px;
+      background: linear-gradient(135deg, #f4d4dd, #eadbcf);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 55px;
+    }
+
+    .product-info {
+      padding: 16px;
+    }
+
+    .product-info h3 {
+      font-size: 17px;
+      margin-bottom: 7px;
+    }
+
+    .price {
+      color: #8e2948;
+      font-family: Arial, sans-serif;
+      font-weight: bold;
+      margin-bottom: 13px;
+    }
+
+    .add-cart {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #8e2948;
+      background: white;
+      color: #8e2948;
+      border-radius: 20px;
+    }
+
+    .add-cart:hover {
+      background: #8e2948;
+      color: white;
+    }
+
+    /* WHY US */
+
+    .why {
+      background: #f8e2e8;
+    }
+
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+
+    .benefit {
+      background: white;
+      padding: 27px 20px;
+      border-radius: 18px;
+      text-align: center;
+    }
+
+    .benefit .icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .benefit h3 {
+      color: #8e2948;
+      margin-bottom: 8px;
+    }
+
+    .benefit p {
+      font-family: Arial, sans-serif;
+      color: #80636b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+
+    footer {
+      background: #3c2029;
+      color: white;
+      text-align: center;
+      padding: 45px 7%;
+    }
+
+    .footer-logo {
+      color: #f3c3d0;
+      font-size: 30px;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    footer p {
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #e9ccd4;
+      margin: 7px;
+    }
+
+    /* CART */
+
+    .cart {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: min(390px, 100%);
+      height: 100vh;
+      background: white;
+      z-index: 500;
+      padding: 25px;
+      box-shadow: -5px 0 20px rgba(0,0,0,.15);
+      transition: right .3s ease;
+      overflow-y: auto;
+    }
+
+    .cart.open {
+      right: 0;
+    }
+
+    .cart-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+
+    .close {
+      border: none;
+      background: none;
+      font-size: 27px;
+    }
+
+    .cart-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .remove {
+      border: none;
+      background: #f4dce2;
+      padding: 6px 10px;
+      border-radius: 15px;
+      margin-top: 7px;
+    }
+
+    .total {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #8e2948;
+    }
+
+    .checkout {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 25px;
+      background: #8e2948;
+      color: white;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    /* MOBILE */
+
+    @media (min-width: 700px) {
+
+      .categories {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .benefits {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        min-height: 520px;
+      }
+
+      .hero h1 {
+        font-size: 55px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header>
+
+    <a href="#home" class="logo">
+      Cheryl's
+      <span>CLOSET</span>
+    </a>
+
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#categories">Shop</a>
+      <a href="#new">New Arrivals</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <button class="cart-btn" onclick="openCart()">
+      🛍️ Cart (<span id="cartCount">0</span>)
+    </button>
+
+  </header>
+
+
+  <!-- HERO -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-content">
+
+      <div class="eyebrow">
+        Fashion • Style • Confidence
+      </div>
+
+      <h1>
+        Cheryl's
+        <br>
+        Closet
+
+        <span>YOUR STYLE, YOUR CLOSET ♥</span>
+      </h1>
+
+      <p>
+        Discover feminine, trendy and stylish pieces
+        carefully selected for the modern woman.
+        Find something you'll love and make it yours.
+      </p>
+
+      <a href="#categories">
+        <button class="shop-btn">
+          SHOP NOW →
+        </button>
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- CATEGORIES -->
+
+  <section id="categories">
+
+    <div class="section-title">
+
+      <h2>Shop by Category</h2>
+
+      <p>
+        Find something perfect for every mood and moment.
+      </p>
+
+    </div>
+
+    <div class="categories">
+
+      <div class="category">👗 Dresses</div>
+
+      <div class="category">👚 Tops</div>
+
+      <div class="category">👖 Bottoms</div>
+
+      <div class="category">🎀 Two-Piece Sets</div>
+
+      <div class="category">✨ Going-Out</div>
+
+      <div class="category">👜 Accessories</div>
+
+    </div>
+
+  </section>
+
+
+  <!-- NEW ARRIVALS -->
+
+  <section id="new">
+
+    <div class="section-title">
+
+      <h2>New Arrivals</h2>
+
+      <p>
+        Fresh pieces for your closet.
+      </p>
+
+    </div>
+
+
+    <div class="products">
+
+      <div class="product">
+
+        <div class="product-image">
+          👗
+        </div>
+
+        <div class="product-info">
+
+          <h3>Elegant Dress</h3>
+
+          <div class="price">
+            ₦18,500
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="addToCart('Elegant Dress',18500)">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          👚
+        </div>
+
+        <div class="product-info">
+
+          <h3>Chic Top</h3>
+
+          <div class="price">
+            ₦9,500
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="addToCart('Chic Top',9500)">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          🎀
+        </div>
+
+        <div class="product-info">
+
+          <h3>Pretty Two-Piece</h3>
+
+          <div class="price">
+            ₦22,000
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="addToCart('Pretty Two-Piece',22000)">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="product">
+
+        <div class="product-image">
+          👖
+        </div>
+
+        <div class="product-info">
+
+          <h3>Classic Bottom</h3>
+
+          <div class="price">
+            ₦15,000
+          </div>
+
+          <button
+            class="add-cart"
+            onclick="addToCart('Classic Bottom',15000)">
+            Add to Cart
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WHY CHERYL'S CLOSET -->
+
+  <section class="why" id="about">
+
+    <div class="section-title">
+
+      <h2>Why Cheryl's Closet?</h2>
+
+      <p>
+        Fashion should feel good, look good and fit your lifestyle.
+      </p>
+
+    </div>
+
+
+    <div class="benefits">
+
+      <div class="benefit">
+
+        <div class="icon">🎀</div>
+
+        <h3>Trendy Styles</h3>
+
+        <p>
+          Carefully selected pieces to keep
+          your wardrobe fresh and stylish.
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="icon">💗</div>
+
+        <h3>Student Friendly</h3>
+
+        <p>
+          Fashionable pieces selected with
+          young women and students in mind.
+        </p>
+
+      </div>
+
+
+      <div class="benefit">
+
+        <div class="icon">📦</div>
+
+        <h3>ACU Delivery</h3>
+
+        <p>
+          Convenient delivery options for
+          students around Ajayi Crowther University.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-logo">
+      Cheryl's Closet
+    </div>
+
+    <p>
+      Your style, your closet. ♥
+    </p>
+
+    <p>
+      Serving women at Ajayi Crowther University.
+    </p>
+
+    <p>
+      © 2026 Cheryl's Closet
+    </p>
+
+  </footer>
+
+
+  <!-- CART -->
+
+  <div class="cart" id="cart">
+
+    <div class="cart-top">
+
+      <h2>Your Cart 🛍️</h2>
+
+      <button class="close" onclick="closeCart()">
+        ×
+      </button>
+
+    </div>
+
+
+    <div id="cartItems">
+
+      <p>
+        Your cart is empty.
+      </p>
+
+    </div>
+
+
+    <div class="total">
+
+      Total: ₦<span id="cartTotal">0</span>
+
+    </div>
+
+
+    <button
+      class="checkout"
+      onclick="checkout()">
+
+      Proceed to Checkout
+
+    </button>
+
+  </div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    let cart = [];
+
+
+    function addToCart(name, price) {
+
+      cart.push({
+        name: name,
+        price: price
+      });
+
+      updateCart();
+
+      alert(name + " has been added to your cart! 🛍️");
+
+    }
+
+
+    function updateCart() {
+
+      const items = document.getElementById("cartItems");
+
+      const count = document.getElementById("cartCount");
+
+      const totalElement = document.getElementById("cartTotal");
+
+
+      count.textContent = cart.length;
+
+
+      if (cart.length === 0) {
+
+        items.innerHTML =
+          "<p>Your cart is empty.</p>";
+
+        totalElement.textContent = "0";
+
+        return;
+
+      }
+
+
+      let total = 0;
+
+      let html = "";
+
+
+      cart.forEach(function(item, index) {
+
+        total += item.price;
+
+
+        html += `
+
+          <div class="cart-item">
+
+            <strong>${item.name}</strong>
+
+            <p>
+              ₦${item.price.toLocaleString()}
+            </p>
+
+            <button
+              class="remove"
+              onclick="removeItem(${index})">
+
+              Remove
+
+            </button>
+
+          </div>
+
+        `;
+
+      });
+
+
+      items.innerHTML = html;
+
+      totalElement.textContent =
+        total.toLocaleString();
+
+    }
+
+
+    function removeItem(index) {
+
+      cart.splice(index, 1);
+
+      updateCart();
+
+    }
+
+
+    function openCart() {
+
+      document
+        .getElementById("cart")
+        .classList.add("open");
+
+    }
+
+
+    function closeCart() {
+
+      document
+        .getElementById("cart")
+        .classList.remove("open");
+
+    }
+
+
+    function checkout() {
+
+      if (cart.length === 0) {
+
+        alert("Your cart is empty.");
+
+        return;
+
+      }
+
+
+      alert(
+        "Checkout will be connected to Cheryl's Closet payment soon! 🎀"
+      );
+
+    }
+
+  </script>
+
+</body>
+  </html>
