@@ -940,7 +940,27 @@
   window.open(whatsappURL, "_blank");
 }
     
+function filterProducts(category) {
 
+  const products = document.querySelectorAll(".product");
+
+  products.forEach(function(product) {
+
+    if (category === "all" ||
+        product.dataset.category === category) {
+
+      product.style.display = "block";
+
+    } else {
+
+      product.style.display = "none";
+
+    }
+
+  });
+
+    }
+    
   </script>
 
 </body>
