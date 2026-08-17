@@ -904,9 +904,26 @@
       }
 
 
-      alert(
-        "Checkout will be connected to Cheryl's Closet payment soon! 🎀"
-      );
+      const order = cart.map(item =>
+  `${item.name} - ₦${item.price.toLocaleString()}`
+).join("\n");
+
+const customerName = prompt("Enter your name:");
+const phone = prompt("Enter your phone number:");
+
+if (!customerName || !phone) {
+  alert("Please enter your name and phone number.");
+  return;
+}
+
+alert(
+  "Order received! 🎀\n\n" +
+  "Customer: " + customerName + "\n" +
+  "Phone: " + phone + "\n\n" +
+  "Items:\n" + order + "\n\n" +
+  "Total: ₦" +
+  cart.reduce((sum, item) => sum + item.price, 0).toLocaleString()
+);
 
     }
 
