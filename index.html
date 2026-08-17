@@ -895,35 +895,57 @@
 
     function checkout() {
 
-      if (cart.length === 0) {
+  if (cart.length === 0) {
 
-        alert("Your cart is empty.");
+    alert("Your cart is empty.");
 
-        return;
+    return;
 
-      }
+  }
 
+  const customerName = prompt("Enter your name:");
 
-      const order = cart.map(item =>
-  `${item.name} - ₦${item.price.toLocaleString()}`
-).join("\n");
+  if (!customerName) {
+    alert("Please enter your name.");
+    return;
+  }
 
-const customerName = prompt("Enter your name:");
-const phone = prompt("Enter your phone number:");
+  const phone = prompt("Enter your phone number:");
 
-if (!customerName || !phone) {
-  alert("Please enter your name and phone number.");
-  return;
+  if (!phone) {
+    alert("Please enter your phone number.");
+    return;
+  }
+
+  let order = "🛍️ *NEW CHERYL'S CLOSET ORDER*%0A%0A";
+
+  order += "👤 Customer: " + customerName + "%0A";
+  order += "📞 Phone: " + phone + "%0A%0A";
+
+  order += "🛒 *Items:*%0A";
+
+  let total = 0;
+
+  cart.forEach(function(item) {
+
+    order += "• " + item.name + " - ₦" +
+      item.price.toLocaleString() + "%0A";
+
+    total += item.price;
+
+  });
+
+  order += "%0A💰 *Total: ₦" +
+    total.toLocaleString() + "*";
+
+  const whatsappNumber = "2347030727624";
+
+  const whatsappURL =
+    "https://wa.me/" + whatsappNumber + "?text=" + order;
+
+  window.open(whatsappURL, "_blank");
+
 }
-
-alert(
-  "Order received! 🎀\n\n" +
-  "Customer: " + customerName + "\n" +
-  "Phone: " + phone + "\n\n" +
-  "Items:\n" + order + "\n\n" +
-  "Total: ₦" +
-  cart.reduce((sum, item) => sum + item.price, 0).toLocaleString()
-);
 
     }
 
