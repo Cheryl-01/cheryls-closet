@@ -1026,89 +1026,319 @@
         .classList.add("open");
 
     }
+<script>
+
+  let cart = [];
 
 
-    function closeCart() {
+  function addToCart(name, price) {
 
-      document
-        .getElementById("cart")
-        .classList.remove("open");
+    const existingItem = cart.find(function(item) {
+      return item.name === name;
+    });
 
-    }
+    if (existingItem) {
 
-
-    function checkout() {
-
-  if (cart.length === 0) {
-    alert("Your cart is empty.");
-    return;
-  }
-
-  const customerName = prompt("Enter your name:");
-
-  if (!customerName) {
-    alert("Please enter your name.");
-    return;
-  }
-
-  const phone = prompt("Enter your phone number:");
-
-  if (!phone) {
-    alert("Please enter your phone number.");
-    return;
-  }
-
-  let order = "NEW CHERYL'S CLOSET ORDER\n\n";
-
-  order += "Customer: " + customerName + "\n";
-  order += "Phone: " + phone + "\n\n";
-  order += "Items:\n";
-
-  let total = 0;
-
-  cart.forEach(function(item) {
-    order += "- " + item.name + " - ₦" +
-      item.price.toLocaleString() + "\n";
-
-    total += item.price;
-  });
-
-  order += "\nTotal: ₦" + total.toLocaleString();
-
-  const whatsappNumber = "2347030727624";
-
-  const whatsappURL =
-    "https://wa.me/" +
-    whatsappNumber +
-    "?text=" +
-    encodeURIComponent(order);
-
-  window.open(whatsappURL, "_blank");
-}
-    
-function filterProducts(category) {
-
-  const products = document.querySelectorAll(".product");
-
-  products.forEach(function(product) {
-
-    if (category === "all" ||
-        product.dataset.category === category) {
-
-      product.style.display = "block";
+      existingItem.quantity += 1;
 
     } else {
 
-      product.style.display = "none";
+      cart.push({
+        name: name,
+        price: price,
+        quantity: 1
+      });
 
     }
 
-  });
+    updateCart();
+
+    alert(name + " has been added to your cart! 🛍️");
+
+  }
+
+
+  function updateCart() {
+
+    const items = document.getElementById("cartItems");
+    const count = document.getElementById("cartCount");
+    const totalElement = document.getElementById("cartTotal");
+
+
+    let totalItems = 0;
+    let total = 0;
+
+
+    cart.forEach(function(item) {
+
+      totalItems += item.quantity;
+
+      total += item.price * item.quantity;
+
+    });
+
+
+    count.textContent = totalItems;
+
+
+    if (cart.length === 0) {
+
+      items.innerHTML =
+        "<p>Your cart is empty.</p>";
+
+      totalElement.textContent = "0";
+
+      return;
 
     }
-    
-   console.log("CATEGORY FILTER LOADED");
-  </script>
+
+
+    let html = "";
+
+
+    cart.forEach(function(item, index) {
+
+      html += `
+
+        <div class="cart-item">
+
+          <strong>${item.name}</strong>
+
+          <p>
+            ₦${item.price.toLocaleString()} each
+          </p>
+
+          <div style="
+            display:flex;
+            align-items:center;
+            gap:10px;
+            margin-top:10px;
+          ">
+
+            <button
+              class="remove"
+              onclick="changeQuantity(${index}, -1)">
+              −
+            </button>
+
+            <strong>
+              ${item.quantity}
+            </strong>
+
+            <button
+              class="remove"
+              onclick="changeQuantity(${index}, 1)">
+              +
+            </button>
+
+          </div>
+
+          <p style="margin-top:10px;">
+            <strong>
+              Subtotal: ₦${(item.price * item.quantity).toLocaleString()}
+            </strong>
+          </p>
+
+          <button
+            class="remove"
+            onclick="removeItem(${index})">
+
+            Remove
+
+          </button>
+
+        </div>
+
+      `;
+
+    });
+
+
+    items.innerHTML = html;
+
+    totalElement.textContent =
+      total.toLocaleString();
+
+  }
+
+
+  function changeQuantity(index, change) {
+
+    cart[index].quantity += change;
+
+
+    if (cart[index].quantity <= 0) {
+
+      cart.splice(index, 1);
+
+    }
+
+
+    updateCart();
+
+  }
+
+
+  function removeItem(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+
+  }
+
+
+  function openCart() {
+
+    document
+      .getElementById("cart")
+      .classList.add("open");
+
+  }
+
+
+  function closeCart() {
+
+    document
+      .getElementById("cart")
+      .classList.remove("open");
+
+  }
+
+
+  function checkout() {
+
+    if (cart.length === 0) {
+
+      alert("Your cart is empty.");
+
+      return;
+
+    }
+
+
+    const customerName =
+      prompt("Enter your name:");
+
+    if (!customerName) {
+
+      alert("Please enter your name.");
+
+      return;
+
+    }
+
+
+    const phone =
+      prompt("Enter your phone number:");
+
+    if (!phone) {
+
+      alert("Please enter your phone number.");
+
+      return;
+
+    }
+
+
+    let order =
+      "NEW CHERYL'S CLOSET ORDER\n\n";
+
+
+    order +=
+      "Customer: " +
+      customerName +
+      "\n";
+
+
+    order +=
+      "Phone: " +
+      phone +
+      "\n\n";
+
+
+    order += "Items:\n";
+
+
+    let total = 0;
+
+
+    cart.forEach(function(item) {
+
+      const subtotal =
+        item.price * item.quantity;
+
+
+      order +=
+        "- " +
+        item.name +
+        " x" +
+        item.quantity +
+        " - ₦" +
+        subtotal.toLocaleString() +
+        "\n";
+
+
+      total += subtotal;
+
+    });
+
+
+    order +=
+      "\nTotal: ₦" +
+      total.toLocaleString();
+
+
+    const whatsappNumber =
+      "2347030727624";
+
+
+    const whatsappURL =
+      "https://wa.me/" +
+      whatsappNumber +
+      "?text=" +
+      encodeURIComponent(order);
+
+
+    window.open(
+      whatsappURL,
+      "_blank"
+    );
+
+  }
+
+
+  function filterProducts(category) {
+
+    const products =
+      document.querySelectorAll(".product");
+
+
+    products.forEach(function(product) {
+
+      if (
+        category === "all" ||
+        product.dataset.category === category
+      ) {
+
+        product.style.display = "block";
+
+      } else {
+
+        product.style.display = "none";
+
+      }
+
+    });
+
+  }
+
+
+  console.log(
+    "CATEGORY FILTER LOADED"
+  );
+
+</script>
 
 </body>
   </html>
