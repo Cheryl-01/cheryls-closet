@@ -204,6 +204,34 @@
       background: linear-gradient(135deg, #f0dfc7, #eed0dc);
     }
 
+    /* SHOP CONTROLS */
+
+.shop-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.shop-controls input,
+.shop-controls select {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #e3c5ce;
+  border-radius: 25px;
+  background: white;
+  color: #43252d;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.shop-controls input:focus,
+.shop-controls select:focus {
+  border-color: #8e2948;
+  box-shadow: 0 0 0 2px rgba(142,41,72,.08);
+}
+    
     /* PRODUCTS */
 
     .products {
@@ -385,18 +413,22 @@
 
     @media (min-width: 700px) {
 
-      .categories {
-        grid-template-columns: repeat(3, 1fr);
-      }
+  .categories {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-      .products {
-        grid-template-columns: repeat(4, 1fr);
-      }
+  .products {
+    grid-template-columns: repeat(4, 1fr);
+  }
 
-      .benefits {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
+  .benefits {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .shop-controls {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+                 }
 
     @media (max-width: 600px) {
 
