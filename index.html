@@ -1643,7 +1643,39 @@ function filterProducts(category) {
     });
 
 }
+  
+// SEARCH PRODUCTS
 
+document
+  .getElementById("searchProducts")
+  .addEventListener("input", function() {
+
+    const searchTerm =
+      this.value.toLowerCase().trim();
+
+    const products =
+      document.querySelectorAll(".product");
+
+    products.forEach(function(product) {
+
+      const productName =
+        product.querySelector("h3").textContent.toLowerCase();
+
+      if (
+        productName.includes(searchTerm)
+      ) {
+
+        product.style.display = "";
+
+      } else {
+
+        product.style.display = "none";
+
+      }
+
+    });
+
+  });
 
   console.log(
     "CHERYL'S CLOSET JAVASCRIPT LOADED"
