@@ -1677,6 +1677,47 @@ document
 
   });
 
+  // PRICE FILTER
+
+document
+  .getElementById("priceFilter")
+  .addEventListener("change", function() {
+
+    const maxPrice = this.value;
+
+    const products =
+      document.querySelectorAll(".product");
+
+    products.forEach(function(product) {
+
+      const priceText =
+        product.querySelector(".price") ||
+        product.querySelector("p strong");
+
+      if (!priceText) return;
+
+      const price =
+        parseInt(
+          priceText.textContent.replace(/\D/g, "")
+        );
+
+      if (
+        maxPrice === "all" ||
+        price <= Number(maxPrice)
+      ) {
+
+        product.style.display = "";
+
+      } else {
+
+        product.style.display = "none";
+
+      }
+
+    });
+
+  });
+
   console.log(
     "CHERYL'S CLOSET JAVASCRIPT LOADED"
   );
