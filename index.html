@@ -1613,17 +1613,94 @@
   }
 
 
-  // CATEGORY FILTER
+   // FILTER SYSTEM
+
+let activeCategory = "all";
+
+
+// CATEGORY FILTER
+
 function filterProducts(category) {
+
+  activeCategory = category;
+
+  applyFilters();
+
+  document
+    .getElementById("shop-products")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+
+}
+
+
+// APPLY FILTERS
+
+function applyFilters() {
+
+  const searchTerm =
+    document
+      .getElementById("searchProducts")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const maxPrice =
+    document
+      .getElementById("priceFilter")
+      .value;
 
   const products =
     document.querySelectorAll(".product");
 
+
   products.forEach(function(product) {
 
+    const productName =
+      product
+        .querySelector("h3")
+        .textContent
+        .toLowerCase();
+
+
+    const categoryMatch =
+      activeCategory === "all" ||
+      product.dataset.category === activeCategory;
+
+
+    const searchMatch =
+      productName.includes(searchTerm);
+
+
+    let priceMatch = true;
+
+
+    const priceElement =
+      product.querySelector(".price") ||
+      product.querySelector("p strong");
+
+
     if (
-      category === "all" ||
-      product.dataset.category === category
+      maxPrice !== "all" &&
+      priceElement
+    ) {
+
+      const price =
+        parseInt(
+          priceElement.textContent.replace(/\D/g, "")
+        );
+
+      priceMatch =
+        price <= Number(maxPrice);
+
+    }
+
+
+    if (
+      categoryMatch &&
+      searchMatch &&
+      priceMatch
     ) {
 
       product.style.display = "";
@@ -1636,88 +1713,22 @@ function filterProducts(category) {
 
   });
 
-  document
-    .getElementById("shop-products")
-    .scrollIntoView({
-      behavior: "smooth"
-    });
-
 }
-  
-// SEARCH PRODUCTS
+
+
+// SEARCH
 
 document
   .getElementById("searchProducts")
-  .addEventListener("input", function() {
+  .addEventListener("input", applyFilters);
 
-    const searchTerm =
-      this.value.toLowerCase().trim();
 
-    const products =
-      document.querySelectorAll(".product");
-
-    products.forEach(function(product) {
-
-      const productName =
-        product.querySelector("h3").textContent.toLowerCase();
-
-      if (
-        productName.includes(searchTerm)
-      ) {
-
-        product.style.display = "";
-
-      } else {
-
-        product.style.display = "none";
-
-      }
-
-    });
-
-  });
-
-  // PRICE FILTER
+// PRICE FILTER
 
 document
   .getElementById("priceFilter")
-  .addEventListener("change", function() {
-
-    const maxPrice = this.value;
-
-    const products =
-      document.querySelectorAll(".product");
-
-    products.forEach(function(product) {
-
-      const priceText =
-        product.querySelector(".price") ||
-        product.querySelector("p strong");
-
-      if (!priceText) return;
-
-      const price =
-        parseInt(
-          priceText.textContent.replace(/\D/g, "")
-        );
-
-      if (
-        maxPrice === "all" ||
-        price <= Number(maxPrice)
-      ) {
-
-        product.style.display = "";
-
-      } else {
-
-        product.style.display = "none";
-
-      }
-
-    });
-
-  });
-
+  .addEventListener("change", applyFilters);
+  
   console.log(
     "CHERYL'S CLOSET JAVASCRIPT LOADED"
   );
