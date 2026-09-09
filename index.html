@@ -1614,38 +1614,35 @@
 
 
   // CATEGORY FILTER
-  function filterProducts(category) {
+function filterProducts(category) {
 
-    const products =
-      document.querySelectorAll(".product");
+  const products =
+    document.querySelectorAll(".product");
 
+  products.forEach(function(product) {
 
-    products.forEach(function(product) {
+    if (
+      category === "all" ||
+      product.dataset.category === category
+    ) {
 
-      if (
-        category === "all" ||
-        product.dataset.category === category
-      ) {
+      product.style.display = "";
 
-        product.style.display = "";
+    } else {
 
-      } else {
+      product.style.display = "none";
 
-        product.style.display = "none";
+    }
 
-      }
+  });
 
+  document
+    .getElementById("shop-products")
+    .scrollIntoView({
+      behavior: "smooth"
     });
 
-
-    // Scroll to the products
-    document
-      .getElementById("new")
-      .scrollIntoView({
-        behavior: "smooth"
-      });
-
-  }
+}
 
 
   console.log(
