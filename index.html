@@ -1767,9 +1767,10 @@ document
 
 document.querySelectorAll(".size-btn").forEach(function(button) {
 
-  button.addEventListener("click", function() {
+  button.onclick = function() {
 
-    const options = button.parentElement.querySelectorAll(".size-btn");
+    const options =
+      button.parentElement.querySelectorAll(".size-btn");
 
     options.forEach(function(option) {
       option.classList.remove("selected");
@@ -1777,7 +1778,7 @@ document.querySelectorAll(".size-btn").forEach(function(button) {
 
     button.classList.add("selected");
 
-  });
+  };
 
 });
   
