@@ -1762,6 +1762,24 @@ document
 document
   .getElementById("priceFilter")
   .addEventListener("change", applyFilters);
+
+  // SIZE BUTTON SELECTION
+
+document.querySelectorAll(".size-btn").forEach(function(button) {
+
+  button.addEventListener("click", function() {
+
+    const options = button.parentElement.querySelectorAll(".size-btn");
+
+    options.forEach(function(option) {
+      option.classList.remove("selected");
+    });
+
+    button.classList.add("selected");
+
+  });
+
+});
   
   console.log(
     "CHERYL'S CLOSET JAVASCRIPT LOADED"
